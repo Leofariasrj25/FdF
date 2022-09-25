@@ -6,12 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/24 21:05:32 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:18:03 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx_mms/mlx.h"
+#include "mlx_linux/mlx.h"
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
