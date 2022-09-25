@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/24 19:58:18 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:53:05 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_map
 {
 	int				length;
 	int				height;
-	struct s_coord	***coords;
+	struct s_coord	***vertices;
 }	t_map;
 
 typedef struct	s_img_data
@@ -48,7 +48,7 @@ typedef struct	s_win_data
 // map
 int		map_open(char *map_name);
 t_list	*map_read(int map_fd);
-t_coord	***map_parse(t_list *map_lines);
+t_coord	***map_parse(t_list *map_lines, int *map_length, int *map_height);
 
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);

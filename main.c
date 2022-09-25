@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/25 17:18:03 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:19:57 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,61 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define W_LENGTH 1000
-#define W_HEIGHT 1000
+#define W_LENGTH 800 
+#define W_HEIGHT 600 
 
-void	draw_map(t_coord ***wireframe, t_frame *img, int color)
+void	draw_map(t_map *map, t_frame *img, int color)
 {
-	int		i;
-	int		j;
-	int		v;
+	int	i;
+	int	j;
+	int	offset_length;
+	int	offset_height;
+	t_coord	***wireframe;
 
+	offset_length = W_LENGTH / map->length;
+	offset_height = W_HEIGHT / map->height;
+	wireframe = map->vertices;
 	i = 0;
 	while (wireframe[i])
 	{
-		j = 1;
-		while (wireframe[i][j - 1] && wireframe[i][j])
+		j = 0;
+		while (wireframe[i][j] && wireframe[i][j + 1])
 		{
-			printf("x0: %d y0: %d\n", wireframe[i][j - 1]->x, wireframe[i][j - 1]->y);
-			printf("x1: %d y1: %d\n", wireframe[i][j]->x, wireframe[i][j]->y);
-			printf("---\n");
-			bresenham(img, wireframe[i][j - 1], wireframe[i][j], color);
+			t_coord point0;
+			t_coord point1;
+			//draw +x
+			point0.x = wireframe[i][j]->x * offset_length;
+			point0.y = wireframe[i][j]->y * offset_height;
+			point0.z = wireframe[i][j]->z;
+
+			point1.x = wireframe[i][j + 1]->x * offset_length;
+			point1.y = wireframe[i][j + 1]->y * offset_height;
+			point1.z = wireframe[i][j]->z;
+
+			if (point0.z != 0 && point1.z != 0)
+				bresenham(img, &point0, &point1, 0xFF1717);
+			else
+				bresenham(img, &point0, &point1, color);
 			j++;
+
+			// draw -y
+			if (i != (map->height - 1))
+			{
+				point1.x = wireframe[i + 1][j - 1]->x * offset_length;
+				point1.y = wireframe[i + 1][j - 1]->y * offset_height;
+				point1.z = wireframe[i + 1][j - 1]->z;
+				if (point0.z != 0 && point1.z != 0)
+					bresenham(img, &point0, &point1, 0xFF1717);
+				else
+					bresenham(img, &point0, &point1, color);
+			}
 		}
 		i++;
 	}
 	//mlx_pixel_put_v2(img, 700, 700, color);
 }
 
-int	render_next_frame(t_win *scene)
+/*int	render_next_frame(t_win *scene)
 {
 	int	color;
 
@@ -50,13 +78,26 @@ int	render_next_frame(t_win *scene)
 	draw_map(scene->wireframe, scene->frame_buffer, color);
 	mlx_put_image_to_window(scene->mlx, scene->window, scene->frame_buffer->img, 700, 700);
 	return (0);
+}*/
+
+t_map	*map_get(char *map_name)
+{
+	int		map_fd;
+	t_map	*map;
+
+	map_fd = map_open(map_name);		
+	t_list *map_lines = map_read(map_fd);
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->vertices = map_parse(map_lines, &map->length, &map->height);
+	return (map);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_win	mlx_win;
-	t_coord	***map;
-
+	t_map	*map;
 	//init mlx
 	mlx_win.mlx = mlx_init();
 	mlx_win.window = mlx_new_window(mlx_win.mlx, W_LENGTH, W_HEIGHT, "Hello World!");
@@ -66,15 +107,11 @@ int	main(int argc, char *argv[])
 			&mlx_win.frame_buffer->line_length, &mlx_win.frame_buffer->endian);
 	
 	// map init
-	int map_fd = map_open(argv[1]);		
-	t_list *map_lines = map_read(map_fd);
-	map = map_parse(map_lines);
-	mlx_win.wireframe = map;
-	
+	map = map_get(argv[1]);	
 	int	color;
 
 	color = 0x00FF00;
-	draw_map(mlx_win.wireframe, mlx_win.frame_buffer, color);
+	draw_map(map, mlx_win.frame_buffer, color);
 	mlx_put_image_to_window(mlx_win.mlx, mlx_win.window, mlx_win.frame_buffer->img, 0, 0);
 	mlx_loop(mlx_win.mlx);
 	return 0;

@@ -6,7 +6,7 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/09/25 17:15:25 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/09/25 17:32:29 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT_DIR = ./libft/
 LIBS_LINUX = -g -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 all:
+	make -C $(LIBFT_DIR)
 	$(CC) $(SRC) $(LIBS_LINUX) -o $(NAME)
 	
 ##all:

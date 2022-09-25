@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/24 17:38:07 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:08:56 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_list	*map_read(int map_fd)
 	return (map_lines);
 }
 
-t_coord	**map_extract_coords(char *line, int line_number)
+t_coord	**map_extract_coords(char *line, int line_number, int *line_size)
 {
 	t_coord		**coord_line;
 	t_coord		*coord;
@@ -70,11 +70,12 @@ t_coord	**map_extract_coords(char *line, int line_number)
 		i++;
 	}
 	coord_line[i] = NULL;
+	*line_size = i;
 	free(line_values);
 	return (coord_line);
 }
 
-t_coord	***map_parse(t_list *map_lines)
+t_coord	***map_parse(t_list *map_lines, int *map_length, int *map_height)
 {
 	t_coord	***wireframe;
 	t_list	*node;
@@ -91,11 +92,12 @@ t_coord	***map_parse(t_list *map_lines)
 	while (node)
 	{
 		line = (char *) node->content;
-		wireframe[i] = map_extract_coords(line, line_number);
+		wireframe[i] = map_extract_coords(line, line_number, map_length);
 		i++;
 		line_number++;
 		node = node->next;
 	}
+	*map_height = i;
 	wireframe[i] = NULL;
 	return (wireframe);
 }
