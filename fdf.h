@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/24 17:39:16 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:58:18 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,32 @@ typedef struct s_map
 	struct s_coord	***coords;
 }	t_map;
 
+typedef struct	s_img_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_frame;
+
+typedef struct	s_win_data
+{
+	void	*mlx;
+	void	*window;
+	t_frame	*frame_buffer;
+	t_coord	***wireframe;
+}	t_win;
+
 // map
 int		map_open(char *map_name);
 t_list	*map_read(int map_fd);
 t_coord	***map_parse(t_list *map_lines);
+
+//draw
+void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
+void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color);
+
+//math
+int	abs(int n);
 #endif
