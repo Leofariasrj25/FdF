@@ -6,7 +6,11 @@
 #    By: lfarias- <leofariasrj25@gmail.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 13:14:18 by lfarias-          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/09/20 22:42:20 by lfarias-         ###   ########.fr        #
+=======
+#    Updated: 2022/09/23 18:58:58 by lfarias-         ###   ########.fr        #
+>>>>>>> 42branch
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +33,10 @@ GNL_SRCS	=	get_next_line.c get_next_line_utils.c
 PF_DIR		=	./ft_printf/
 PF_SRCS		=	ft_hexstr.c ft_printf.c ft_ptoa.c ft_utoa.c
 PRINTF		= 	$(addprefix $(PF_DIR), $(PF_SRCS))
+<<<<<<< HEAD
+=======
+
+>>>>>>> 42branch
 OBJS		=	$(SRCS:.c=.o)
 GNL_OBJS	=	$(GNL_SRCS:.c=.o)
 PF_OBJS		=	$(PRINTF:.c=.o)
@@ -49,5 +57,14 @@ fclean: clean
 
 re: fclean all
 
+<<<<<<< HEAD
 .PHONY:
 	all clean fclean re 
+=======
+bonus: $(NAME)
+	$(CC) $(CFLAGS) -I$(INCLUDES) $(BONUSES)
+	ar -qs $(NAME) $(BOBJS)
+
+.PHONY:
+	all clean fclean re bonus
+>>>>>>> 42branch
