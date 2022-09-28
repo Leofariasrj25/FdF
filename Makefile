@@ -6,7 +6,7 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/09/25 17:32:29 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/09/25 21:08:02 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ all:
 	make -C $(LIBFT_DIR)
 	$(CC) $(SRC) $(LIBS_LINUX) -o $(NAME)
 	
-##all:
-	##make -C $(LIBFT_DIR)
-	##$(CC) -g -I./mlx_mms/ $(SRC) -Llibft -lft -Lmlx_mms -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+## all:
+	## make -C $(LIBFT_DIR)
+	## $(CC) -g -I./mlx_mms/ $(SRC) -Llibft -lft -Lmlx_mms -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	rm -f $(NAME)

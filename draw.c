@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/25 17:31:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/27 15:05:05 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,3 @@ void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color)
 			draw_high_line(img, point0, point1, color);
 	}
 }
-
