@@ -6,13 +6,35 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/30 22:12:24 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:16:36 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_frame *data, int x, int y, int color)
+void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color);
+void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
+void	draw_high_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
+
+void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color)
+{
+	if (abs(point1->y - point0->y) < abs(point1->x - point0->x))
+	{
+		if (point0->x > point1->x)
+			draw_low_line(img, point1, point0, color);
+		else
+			draw_low_line(img, point0, point1, color);
+	}
+	else
+	{
+		if (point0->y > point1->y)
+			draw_high_line(img, point1, point0, color);
+		else
+			draw_high_line(img, point0, point1, color);
+	}
+}
+
+void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -40,7 +62,7 @@ void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 	x = point0->x;
 	while (x < point1->x)
 	{
-		my_mlx_pixel_put(img, x, y, color);
+		mlx_pixel_put_v2(img, x, y, color);
 		if (d_factor > 0)
 		{
 			y = y + yi;
@@ -74,7 +96,7 @@ void	draw_high_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 	y = point0->y;
 	while (y < point1->y)
 	{
-		my_mlx_pixel_put(img, x, y, color);
+		mlx_pixel_put_v2(img, x, y, color);
 		if (d_factor > 0)
 		{
 			x = x + xi;
@@ -83,23 +105,5 @@ void	draw_high_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 		else
 			d_factor = d_factor + 2 * delta_x;
 		y++;
-	}
-}
-
-void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color)
-{
-	if (abs(point1->y - point0->y) < abs(point1->x - point0->x))
-	{
-		if (point0->x > point1->x)
-			draw_low_line(img, point1, point0, color);
-		else
-			draw_low_line(img, point0, point1, color);
-	}
-	else
-	{
-		if (point0->y > point1->y)
-			draw_high_line(img, point1, point0, color);
-		else
-			draw_high_line(img, point0, point1, color);
 	}
 }
