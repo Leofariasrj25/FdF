@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/25 17:53:05 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:01:29 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
 void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color);
 
 //math
-int	abs(int n);
+int		abs(int n);
+double	dg2_rad(double angle);
 #endif

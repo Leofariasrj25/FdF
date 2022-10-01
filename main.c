@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/27 23:10:06 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:06:33 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 
 #define W_LENGTH 1024 
 #define W_HEIGHT 800 
-
-double	dg2_rad(double angle)
-{
-	static const double	pi = 3.14159;
-
-	return (pi * angle / (double) 180.00);
-}
 
 void	isometric(t_coord *point)
 {

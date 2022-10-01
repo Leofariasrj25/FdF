@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/27 15:05:05 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:12:24 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ void	my_mlx_pixel_put(t_frame *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	abs(int n)
-{
-	if (n > 0)
-		return (n);
-	else
-		return (n * -1);
-}
-
-//
 // slopes between -1 and 0, 0 and 1
 void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
