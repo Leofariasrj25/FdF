@@ -6,12 +6,12 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/09/25 21:08:02 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/09/30 22:35:51 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC = main.c draw.c map_parser.c
+SRC = main.c draw.c map_parser.c transformations.c math_utils.c
 CC = gcc
 LIBFT_DIR = ./libft/
 LIBS_LINUX = -g -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz

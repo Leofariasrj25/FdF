@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/30 22:16:36 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:21:39 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color);
 void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
 void	draw_high_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
 
-void	bresenham(t_frame *img, t_coord *point0, t_coord *point1, int color)
+void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
 	if (abs(point1->y - point0->y) < abs(point1->x - point0->x))
 	{
@@ -46,7 +46,9 @@ void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color)
 void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
 	int	delta_x;
-	int	delta_y; int	d_factor; int yi; int	x;
+	int	delta_y; 
+	int	d_factor; 
+	int yi; int	x;
 	int y;
 
 	delta_x = point1->x - point0->x;

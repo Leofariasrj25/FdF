@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/30 22:06:33 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:02:29 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,21 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define W_LENGTH 1024 
-#define W_HEIGHT 800 
-
-void	isometric(t_coord *point)
-{
-	double	angle;
-
-	angle = 20;
-	point->x = point->x * cos(dg2_rad(angle)) + point->y * cos(dg2_rad(angle) + dg2_rad(120)) + point->z * cos(dg2_rad(angle) - dg2_rad(120));
-	point->y = point->x * sin(dg2_rad(angle)) + point->y * sin(dg2_rad(angle) + dg2_rad(120)) + point->z * sin(dg2_rad(angle) - dg2_rad(120));
-}
+#define W_LENGTH 1920 
+#define W_HEIGHT 1080 
 
 void	draw_map(t_map *map, t_frame *img, int color)
 {
 	int	i;
 	int	j;
-	int	offset_length;
-	int	offset_height;
+	double	offset_length;
+	double	offset_height;
+	double	offset_depth;
 	t_coord	***wireframe;
 
-	offset_length = 30;
-	offset_height = 30;
+	offset_height = 40;
+	offset_length = 40;
+	offset_depth = 5;
 	wireframe = map->vertices;
 	i = 0;
 	while (wireframe[i])
@@ -50,25 +43,25 @@ void	draw_map(t_map *map, t_frame *img, int color)
 			//magnify
 			point0.x = (wireframe[i][j]->x * offset_length);
 			point0.y = (wireframe[i][j]->y * offset_height);
-			point0.z = wireframe[i][j]->z;
+			point0.z = (wireframe[i][j]->z * offset_depth);
 
 			point1.x = (wireframe[i][j + 1]->x * offset_length);
 			point1.y = (wireframe[i][j + 1]->y * offset_height);
-			point1.z = wireframe[i][j]->z;
+			point1.z = (wireframe[i][j + 1]->z * offset_depth);
 			
 			isometric(&point0);
 			isometric(&point1);
 
-			point0.x = point0.x + W_LENGTH / 2;
-			point0.y = point0.y + W_HEIGHT / 4;
+			point0.x = point0.x + W_LENGTH / (double) 2;
+			point0.y = point0.y + W_HEIGHT / (double) 4;
 
-			point1.x = point1.x + W_LENGTH / 2;
-			point1.y = point1.y + W_HEIGHT / 4;
+			point1.x = point1.x + W_LENGTH / (double) 2;
+			point1.y = point1.y + W_HEIGHT / (double) 4;
 
 			if (point0.z != 0 && point1.z != 0)
-				bresenham(img, &point0, &point1, 0xFF1717);
+				draw_line(img, &point0, &point1, 0xFF1717);
 			else
-				bresenham(img, &point0, &point1, color);
+				draw_line(img, &point0, &point1, color);
 			j++;
 
 			// draw -y
@@ -76,16 +69,16 @@ void	draw_map(t_map *map, t_frame *img, int color)
 			{
 				point1.x = (wireframe[i + 1][j - 1]->x * offset_length);
 				point1.y = (wireframe[i + 1][j - 1]->y * offset_height);
-				point1.z = wireframe[i + 1][j - 1]->z;
+				point1.z = (wireframe[i + 1][j - 1]->z * offset_depth);
 
 				isometric(&point1);
-				point1.x = point1.x + W_LENGTH / 2;
-				point1.y = point1.y + W_HEIGHT / 4;
+				point1.x = point1.x + W_LENGTH / (double) 2;
+				point1.y = point1.y + W_HEIGHT / (double) 4;
 
 				if (point0.z != 0 && point1.z != 0)
-					bresenham(img, &point0, &point1, 0xFF1717);
+					draw_line(img, &point0, &point1, 0xFF1717);
 				else
-					bresenham(img, &point0, &point1, color);
+					draw_line(img, &point0, &point1, color);
 			}
 		}
 		i++;
@@ -115,7 +108,7 @@ int	main(int argc, char *argv[])
 	mlx_win.mlx = mlx_init();
 	mlx_win.window = mlx_new_window(mlx_win.mlx, W_LENGTH, W_HEIGHT, "Hello World!");
 	mlx_win.frame_buffer = malloc(sizeof(t_frame));
-	mlx_win.frame_buffer->img = mlx_new_image(mlx_win.mlx, W_LENGTH, W_HEIGHT);
+	mlx_win.frame_buffer->img = mlx_new_image(mlx_win.mlx, W_LENGTH * 2, W_HEIGHT * 2);
 	mlx_win.frame_buffer->addr = mlx_get_data_addr(mlx_win.frame_buffer->img, &mlx_win.frame_buffer->bits_per_pixel,
 			&mlx_win.frame_buffer->line_length, &mlx_win.frame_buffer->endian);
 	
