@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/09/25 18:08:56 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:36:41 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,60 +46,82 @@ t_list	*map_read(int map_fd)
 	return (map_lines);
 }
 
-t_coord	**map_extract_coords(char *line, int line_number, int *line_size)
+void	free_2d_array(void **matrix)
 {
-	t_coord		**coord_line;
-	t_coord		*coord;
-	char		**line_values;
-	int			i;
+	int i;
 
-	line_values = ft_split(line, ' ');
 	i = 0;
-	while (line_values[i])
-		i++;
-	coord_line = malloc(sizeof(t_coord *) * (i + 1));
-	i = 0;
-	while (line_values[i])
+	while (matrix[i])
 	{
-		coord = malloc(sizeof(t_coord));
-		coord->x = i;
-		coord->y = line_number;
-		coord->z = ft_atoi(line_values[i]);
-		coord_line[i] = coord;
-		free(line_values[i]);
+		free(matrix[i]);
 		i++;
 	}
-	coord_line[i] = NULL;
-	*line_size = i;
-	free(line_values);
-	return (coord_line);
+	free(matrix);
 }
 
-t_coord	***map_parse(t_list *map_lines, int *map_length, int *map_height)
-{
-	t_coord	***wireframe;
-	t_list	*node;
-	char	*line;
-	int		line_number;
-	int		i;
+// TO-DO: free resources
+// Test code
+t_coord	**map_extract_coords(char **fields, t_coord **points)
+{	
+	static int	line_number;
+	static int	p_i;	
+	int			i;
+	char		**z_and_color;
+	t_coord		*point;
 
-	wireframe = malloc(sizeof(t_coord **) * (ft_lstsize(map_lines) + 1));
-	if (!wireframe)
-		return (NULL);
 	i = 0;
-	line_number = 0;
-	node = map_lines;
-	while (node)
+	while (fields[i])
 	{
-		line = (char *) node->content;
-		wireframe[i] = map_extract_coords(line, line_number, map_length);
+		// z_and_color = ft_split(fields[i], ',');
+		point = malloc(sizeof(t_coord *));
+		point->x = i;
+		point->y = line_number;
+		point->z = ft_atoi(z_and_color[0]);
+		//TO-DO: implement color parsing
+		points[p_i] = point;
+		p_i++;
 		i++;
-		line_number++;
-		node = node->next;
 	}
-	*map_height = i;
-	wireframe[i] = NULL;
-	return (wireframe);
+	line_number++;
+	return (points);
+}
+
+int	get_line_size(char **fields)
+{
+	int		size;
+
+	if (!fields)
+		return (0);
+	while (fields[size])
+	{
+		size++;
+	}
+	return (size);
+}
+
+//TO-DO test code
+//TO-DO free resources
+t_coord	**map_parse(t_list *map_lines, int *map_length, int *map_height)
+{
+	t_list	*line;
+	char	**fields;
+	t_coord	**points;
+
+	line = map_lines;
+	while (line)
+	{	
+		
+		fields = ft_split(line->content, ' ');
+		if (points == NULL)
+		{
+			*map_length = get_line_size(fields);
+			*map_height = ft_lstsize(map_lines);
+			points = malloc(sizeof(t_coord *) * (*map_length * *map_height));
+		}
+		map_extract_coords(fields, points);
+		line = line->next;
+	}
+	return (points);
 }
 
 /*#include <stdio.h>

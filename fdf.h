@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/06 18:45:19 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/13 00:27:15 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ typedef struct s_map
 	struct s_coord	***vertices;
 }	t_map;
 
-typedef struct line_info
-{
-	t_coord	*point0;
-	t_coord	*point1;
-	int		color;
-	int		delta_x;
-	int		delta_y;
-	int		delta_z;
-	int		x_axis;
-	int		y_axis;
-	int		z_axis;
-}	t_line;
-
 typedef struct s_img_data
 {
 	void	*img;
@@ -61,11 +48,12 @@ typedef struct s_win_data
 // map
 int		map_open(char *map_name);
 t_list	*map_read(int map_fd);
-t_coord	***map_parse(t_list *map_lines, int *map_length, int *map_height);
+t_coord	**map_parse(t_list *map_lines, int *map_length, int *map_height);
 
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
 void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
+t_map	*map_get(char *map_name);
 
 // math
 int		abs(int n);

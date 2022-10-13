@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/12 13:02:29 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/12 18:13:43 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define W_LENGTH 1920 
-#define W_HEIGHT 1080 
-
+// TO-DO reimplement a better drawning algo
 void	draw_map(t_map *map, t_frame *img, int color)
 {
 	int	i;
@@ -26,10 +24,11 @@ void	draw_map(t_map *map, t_frame *img, int color)
 	double	offset_length;
 	double	offset_height;
 	double	offset_depth;
+	// TO-DO reimplement a better structure for the wireframe
 	t_coord	***wireframe;
 
 	offset_height = 40;
-	offset_length = 40;
+	offset_length = 40; 
 	offset_depth = 5;
 	wireframe = map->vertices;
 	i = 0;
@@ -86,6 +85,43 @@ void	draw_map(t_map *map, t_frame *img, int color)
 	//mlx_pixel_put_v2(img, 700, 700, color);
 }
 
+int	on_limits(t_coord *point, int img_length, int img_height, double scale)
+{
+	double	x;
+	double	y;
+	double	z;
+
+	x = point->x * scale;
+	y = point->y * scale;
+	if (x < 0.0 || x > img_length)
+		return (0);
+	else if (y < 0.0 || y > img_height)
+		return (0);
+	else
+		return (1);
+}
+
+/*double	get_scale(t_coord ***wireframe, int initial_scale, int img_length, int img_height) 
+{
+// enquanto nenhum dos pontos da imagem 'vazar' a tela, continue adicionando a escala.
+// multiplique todos os pontos por essa nova escala
+
+	double	scale;
+	t_coord *point;
+	int i;
+	int j;
+
+	scale = 0.2;
+	point = wireframe[0][0];
+	i = 1;
+	while (on_limits(point, img_length, img_height, initial_scale * scale))
+	{
+		j = 0;
+		while (j < img 
+	}
+	return (scale);
+}*/
+
 t_map	*map_get(char *map_name)
 {
 	int		map_fd;
@@ -106,9 +142,13 @@ int	main(int argc, char *argv[])
 	t_map	*map;
 	//init mlx
 	mlx_win.mlx = mlx_init();
-	mlx_win.window = mlx_new_window(mlx_win.mlx, W_LENGTH, W_HEIGHT, "Hello World!");
+	int x_length;
+	int y_height;
+	mlx_get_screen_size(mlx_win.mlx, &x_length, &y_height);
+	printf("Screen resolution: %dx%d\n", x_length, y_height);
+	mlx_win.window = mlx_new_window(mlx_win.mlx, x_length, y_height, "FdF - lfarias-");
 	mlx_win.frame_buffer = malloc(sizeof(t_frame));
-	mlx_win.frame_buffer->img = mlx_new_image(mlx_win.mlx, W_LENGTH * 2, W_HEIGHT * 2);
+	mlx_win.frame_buffer->img = mlx_new_image(mlx_win.mlx, x_length, y_height);
 	mlx_win.frame_buffer->addr = mlx_get_data_addr(mlx_win.frame_buffer->img, &mlx_win.frame_buffer->bits_per_pixel,
 			&mlx_win.frame_buffer->line_length, &mlx_win.frame_buffer->endian);
 	
