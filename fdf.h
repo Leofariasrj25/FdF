@@ -6,13 +6,16 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/13 00:27:15 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:40:55 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "libft/libft.h"
+
+# define SCREEN_W 1920
+# define SCREEN_L 1080
 
 typedef struct s_coord
 {
@@ -25,7 +28,9 @@ typedef struct s_map
 {
 	int				length;
 	int				height;
-	struct s_coord	***vertices;
+	int				size;
+	double			scale;
+	struct s_coord	*points;
 }	t_map;
 
 typedef struct s_img_data
@@ -37,13 +42,16 @@ typedef struct s_img_data
 	int		endian;
 }	t_frame;
 
-typedef struct s_win_data
+typedef struct s_app_info
 {
 	void	*mlx;
 	void	*window;
 	t_frame	*frame_buffer;
-	t_coord	***wireframe;
-}	t_win;
+	t_map	*map;
+	double	map_scale;
+	int		screen_w;
+	int		screen_l;
+}	t_app;
 
 // map
 int		map_open(char *map_name);
@@ -60,5 +68,9 @@ int		abs(int n);
 double	dg2_rad(double angle);
 
 // transformations
-void	isometric(t_coord *point);
+void	isometric(t_coord *points);
+void	scale(t_coord *points, double scale, int size);
+
+//utils
+void	free_2d_array(void **matrix);
 #endif

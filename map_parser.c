@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/13 00:36:41 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:32:53 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 #include <fcntl.h>
+
+int	get_line_size(char **fields)
+{
+	int		size;
+
+	if (!fields)
+		return (0);
+	while (fields[size])
+	{
+		size++;
+	}
+	return (size);
+}
 
 int	map_open(char *map_name)
 {
@@ -46,25 +59,12 @@ t_list	*map_read(int map_fd)
 	return (map_lines);
 }
 
-void	free_2d_array(void **matrix)
-{
-	int i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-}
-
-// TO-DO: free resources
+// TO*-DO: free resources
 // Test code
-t_coord	**map_extract_coords(char **fields, t_coord **points)
+t_coord	*map_extract_coords(char **fields, t_coord *points)
 {	
 	static int	line_number;
-	static int	p_i;	
+	static int	p_i;
 	int			i;
 	char		**z_and_color;
 	t_coord		*point;
@@ -74,29 +74,16 @@ t_coord	**map_extract_coords(char **fields, t_coord **points)
 	{
 		// z_and_color = ft_split(fields[i], ',');
 		point = malloc(sizeof(t_coord *));
-		point->x = i;
-		point->y = line_number;
-		point->z = ft_atoi(z_and_color[0]);
+		point[p_i].x = i;
+		point[p_i].y = line_number;
+		point[p_i].z = ft_atoi(z_and_color[0]);
+		
 		//TO-DO: implement color parsing
-		points[p_i] = point;
 		p_i++;
 		i++;
 	}
 	line_number++;
 	return (points);
-}
-
-int	get_line_size(char **fields)
-{
-	int		size;
-
-	if (!fields)
-		return (0);
-	while (fields[size])
-	{
-		size++;
-	}
-	return (size);
 }
 
 //TO-DO test code
@@ -105,20 +92,20 @@ t_coord	**map_parse(t_list *map_lines, int *map_length, int *map_height)
 {
 	t_list	*line;
 	char	**fields;
-	t_coord	**points;
+	t_coord	*points;
 
 	line = map_lines;
 	while (line)
-	{	
-		
+	{
 		fields = ft_split(line->content, ' ');
 		if (points == NULL)
 		{
 			*map_length = get_line_size(fields);
 			*map_height = ft_lstsize(map_lines);
-			points = malloc(sizeof(t_coord *) * (*map_length * *map_height));
+			points = malloc(sizeof(t_coord) * (*map_length * *map_height));
 		}
 		map_extract_coords(fields, points);
+		free_2d_array((void **) fields);
 		line = line->next;
 	}
 	return (points);
