@@ -6,18 +6,28 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/14 23:34:08 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:25:01 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx_linux/mlx.h"
-//#include "mlx_mms/mlx.h"
+//#include "mlx_linux/mlx.h"
+#include "mlx_mms/mlx.h"
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
 
-// TO-DO reimplement a better drawning algo
+/* TO-DO reimplement a better drawning algo
+void	draw_segment(t_app *data, t_coord *point0, t_coord *point1, int color)
+{
+		// iterate over all the points
+		// if the point is valid, meaning, it's inside the screen then do this:
+		// get the first point, connect it to other two points
+		// those points will be point[i] point[i + 1][j + 1] point[i] point[i + 1] point[i + 1][j + 1]
+		// always draw the points in clockwise direction
+		draw_line(data->bitmap, point0, point1, color);
+}*/
+
 void	draw_map(t_app *data, int color)
 {
 	// first scale, then rotate then translate
@@ -27,20 +37,16 @@ void	draw_map(t_app *data, int color)
 	copy_points(projection, data->map->points, data->map->size);
 	fit_img(data, projection);
 	int i = 0;
-	while (i < data->map->size)
+	int j = 1;
+	while (i < (data->map->size - data->map->width - 1))
 	{
-		printf("points %d x = %lf and y = %lf\n", i, projection[i].x, projection[i].y);
-		if (projection[i].x < 0 || projection[i].x > SCREEN_W)
+		if (i < (data->map->width * j - 1))	
 		{
-			i++;
-			continue;
+			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);	
+			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
 		}
-		if (projection[i].y < 0 || projection[i].y > SCREEN_H)
-		{
-			i++;
-			continue;
-		}
-		mlx_pixel_put_v2(data->bitmap, projection[i].x, projection[i].y, color);
+		else
+			j++;
 		i++;
 	}
 }
