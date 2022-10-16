@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/14 23:24:07 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 19:10:26 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 # define FDF_H
 # include "libft/libft.h"
 
-# define SCREEN_W 1920
-# define SCREEN_H 1080
+# define SCREEN_W 1440
+# define SCREEN_H 900 
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
-	double	z;
+	double			x;
+	double			y;
+	double			z;
+	unsigned int	color;
 }	t_coord;
 
 typedef struct s_map

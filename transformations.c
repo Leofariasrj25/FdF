@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:19:28 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/14 23:35:44 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:00:57 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	isometric(t_coord *point, int size)
 	double	rot;
 	t_coord	holder;
 
-	angle = 30;
+	angle = 15;
 	rot = 120;
 	i = 0;
 	while (i < size)

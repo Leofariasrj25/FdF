@@ -6,13 +6,13 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/15 20:25:01 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 00:55:14 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-//#include "mlx_linux/mlx.h"
-#include "mlx_mms/mlx.h"
+#include "mlx_linux/mlx.h"
+//#include "mlx_mms/mlx.h"
 #include <math.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -42,7 +42,15 @@ void	draw_map(t_app *data, int color)
 	{
 		if (i < (data->map->width * j - 1))	
 		{
+			if (projection[i].z != 0 || projection[i + 1].z != 0)
+				color = 0xFF0000;
+			else
+				color = 0x00FF00;
 			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);	
+			if (projection[i].z != 0 || projection[i + data->map->width].z != 0)
+				color = 0xFF0000;
+			else
+				color = 0x00FF00;
 			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
 		}
 		else

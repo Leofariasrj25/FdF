@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/15 01:23:33 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 01:02:49 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	fit_img(t_app *data, t_coord *projection)
 
 	data->map->scale = 1;
 	data->map->source.x = (SCREEN_W / 2); 
-	data->map->source.y = (SCREEN_H / 4);
+	data->map->source.y = (SCREEN_H / 2);
 	data->map->source.z = 0;
 	resize_img(data, projection);	
 	while (on_limits(data, projection))
