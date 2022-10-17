@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 19:01:06 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 21:39:12 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_list	*map_read(int map_fd)
 	return (map_lines);
 }
 
-// TO*-DO: free resources
 // Test code
 t_coord	*map_extract_coords(char **fields, t_coord *points)
 {	
@@ -73,15 +72,15 @@ t_coord	*map_extract_coords(char **fields, t_coord *points)
 	i = 0;
 	while (fields[i])
 	{
-		printf("points address: %p\n", points);
-		// z_and_color = ft_split(fields[i], ',');
+		z_and_color = ft_split(fields[i], ',');
 		points[p_i].x = i;
 		points[p_i].y = line_number;
-		points[p_i].z = ft_atoi(fields[i]);
-		//point[p_i].z = ft_atoi(z_and_color[0]);
-		
-		printf("points %d x = %lf and y = %lf\n", p_i, points[p_i].x, points[p_i].y);
-		//TO-DO: implement color parsing
+		points[p_i].z = ft_atoi(z_and_color[0]);
+		points[p_i].color = atohex(z_and_color[1]);	
+		printf("the point color in the map is: %s %d\n", z_and_color[1], atohex(z_and_color[1]));
+		printf("the point color in the coord is: %d\n", points[p_i].color);
+
+		free_2d_array((void **) z_and_color);
 		p_i++;
 		i++;
 	}
@@ -108,7 +107,6 @@ t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height)
 			*map_height = ft_lstsize(map_lines);
 			points = malloc(sizeof(t_coord) * (*map_length * *map_height));
 		}
-		printf("points address: %p\n", points);
 		map_extract_coords(fields, points);
 		free_2d_array((void **) fields);
 		line = line->next;

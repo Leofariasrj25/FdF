@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 01:02:49 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:54:17 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	resize_img(t_app *data, t_coord *projection)
 {
-	
+	z_scale(data, projection, data->map->size);
 	isometric(projection, data->map->size);
 	scale(projection, data->map->scale, data->map->size);
 	translate(projection, &data->map->source, data->map->size);
@@ -50,8 +50,8 @@ void	fit_img(t_app *data, t_coord *projection)
 	int		i;
 
 	data->map->scale = 1;
-	data->map->source.x = (SCREEN_W / 2); 
-	data->map->source.y = (SCREEN_H / 2);
+	data->map->source.x = (SCREEN_W / 4); 
+	data->map->source.y = SCREEN_H - (SCREEN_H / 4);
 	data->map->source.z = 0;
 	resize_img(data, projection);	
 	while (on_limits(data, projection))

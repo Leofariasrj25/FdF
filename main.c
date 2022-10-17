@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 00:55:14 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/17 01:09:24 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,22 @@ void	draw_map(t_app *data, int color)
 	fit_img(data, projection);
 	int i = 0;
 	int j = 1;
+	// hypothesis, start to draw from the end of the row towards the beginning
 	while (i < (data->map->size - data->map->width - 1))
 	{
 		if (i < (data->map->width * j - 1))	
 		{
-			if (projection[i].z != 0 || projection[i + 1].z != 0)
-				color = 0xFF0000;
+			if (projection[i].color == 0 && projection[i + 1].color == 0)
+				color =	0x00FFFFFF;
 			else
-				color = 0x00FF00;
+				color = projection[i].color;
 			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);	
-			if (projection[i].z != 0 || projection[i + data->map->width].z != 0)
-				color = 0xFF0000;
+			if (projection[i].color == 0 && projection[i + data->map->width].color == 0)
+				color =	0x00FFFFFF;
 			else
-				color = 0x00FF00;
+				color = projection[i].color;
+			if (projection[i].z != 0 && projection[i + data->map->width].z != 0)
+				color =	0x00FFFFFF;
 			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
 		}
 		else

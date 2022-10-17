@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 19:10:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/16 22:30:34 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_coord
 	double			x;
 	double			y;
 	double			z;
-	unsigned int	color;
+	int				color;
 }	t_coord;
 
 typedef struct s_map
@@ -74,8 +74,10 @@ double	dg2_rad(double angle);
 void	isometric(t_coord *points, int size);
 void	scale(t_coord *points, double scale, int size);
 void	translate(t_coord *point, t_coord *move, int size);
+void	z_scale(t_app *data, t_coord *projection, int size);
 
 //utils
 void	free_2d_array(void **matrix);
 t_coord	*copy_points(t_coord *dst, t_coord *src, int size);
+int	atohex(char *str);
 #endif

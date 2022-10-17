@@ -3,4 +3,4 @@
 *.FDF
 *.o
 *.zip
-libft.a
+*libft.a
