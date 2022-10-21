@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:19:28 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/17 00:49:20 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:12:12 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	z_scale(t_app *data, t_coord *projection, int size)
 	i = 0;
 	while (i < size)
 	{
-		projection[i].z = projection[i].z / (double) 1.5;
+		projection[i].z = projection[i].z / (double) 5;
 		i++;
 	}
 }

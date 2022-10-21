@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:29:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 13:33:31 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:08:44 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_map	*map_get(char *map_name)
 	map->size = map->width * map->length;
 	get_minmax_z(map);
 	map->name = ft_strrchr(map_name, '/');
+	if (!map->name)
+		map->name = map_name;
 	return (map);
 }
 

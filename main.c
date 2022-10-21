@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 14:30:28 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:37:29 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,6 @@
 //#include "mlx_mms/mlx.h"
 #include <math.h>
 #include <unistd.h>
-
-void	draw_map(t_app *data, int color)
-{
-	// first scale, then rotate then translate
-	t_coord	*projection;
-	
-	projection = malloc(sizeof(t_coord) * data->map->size);
-	copy_points(projection, data->map->points, data->map->size);
-	fit_img(data, projection);
-	int i = 0;
-	int j = 1;
-	// hypothesis, start to draw from the end of the row towards the beginning
-	while (i < (data->map->size - data->map->width - 1))
-	{
-		if (i < (data->map->width * j - 1))	
-		{
-			if (projection[i].color == 0 && projection[i + 1].color == 0)
-				color =	0x00FFFFFF;
-			else
-				color = projection[i].color;
-			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);	
-			if (projection[i].color == 0 && projection[i + data->map->width].color == 0)
-				color =	0x00FFFFFF;
-			else
-				color = projection[i].color;
-			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
-		}
-		else
-			j++;
-		i++;
-	}
-}
 
 int	main(int argc, char *argv[])
 {
@@ -67,6 +35,7 @@ int	main(int argc, char *argv[])
 	color = 0x00FF00;
 	draw_map(&app_data, color);
 	mlx_put_image_to_window(app_data.mlx, app_data.window, app_data.bitmap->img, 0, 0);
+	write_menu(&app_data);
 	mlx_loop(app_data.mlx);
 	return 0;
 }

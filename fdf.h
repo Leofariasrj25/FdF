@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 13:34:03 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 20:40:29 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 
 # define SCREEN_W 1920
 # define SCREEN_L 1080 
+
+# define MENU_WIDTH 200 
+# define MENU_BG_COLOR 0x002E323C
+# define MENU_KEY_COLOR 0x00AFB0AF
+# define MENU_VALUE_COLOR 0x00FF6188
+
+# define CANVAS_MARGIN 30
 
 typedef struct s_coord
 {
@@ -58,6 +65,10 @@ typedef struct s_app_info
 	int		screen_l;
 }	t_app;
 
+// menu
+void	write_menu(t_app *data);
+void	create_menu_sidebar(t_app *data);
+
 // map
 t_map	*map_get(char *map_name);
 int		map_open(char *map_name);
@@ -67,11 +78,11 @@ t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height);
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
 void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
-t_map	*map_get(char *map_name);
+void	draw_map(t_app *data);
 void	fit_img(t_app *data, t_coord *projection);
 
 // math
-int		abs(int n);
+int		get_abs(int n);
 double	dg2_rad(double angle);
 
 // transformations
@@ -81,7 +92,8 @@ void	translate(t_coord *point, t_coord *move, int size);
 void	z_scale(t_app *data, t_coord *projection, int size);
 
 //utils
+void	print_str(t_app *data, t_coord *point, int color, char *value);
 void	free_2d_array(void **matrix);
 t_coord	*copy_points(t_coord *dst, t_coord *src, int size);
-int	atohex(char *str);
+int		atohex(char *str);
 #endif

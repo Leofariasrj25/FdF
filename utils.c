@@ -6,11 +6,17 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:37:46 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 21:46:34 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:42:17 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx_linux/mlx.h"
+
+void	print_str(t_app *data, t_coord *point, int color, char *str)
+{
+	mlx_string_put(data->mlx, data->window, point->x, point->y, color, str);
+}
 
 void	free_2d_array(void **matrix)
 {
