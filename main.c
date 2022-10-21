@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/17 01:09:24 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:13:03 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,7 @@
 #include "mlx_linux/mlx.h"
 //#include "mlx_mms/mlx.h"
 #include <math.h>
-#include <stdio.h>
 #include <unistd.h>
-
-/* TO-DO reimplement a better drawning algo
-void	draw_segment(t_app *data, t_coord *point0, t_coord *point1, int color)
-{
-		// iterate over all the points
-		// if the point is valid, meaning, it's inside the screen then do this:
-		// get the first point, connect it to other two points
-		// those points will be point[i] point[i + 1][j + 1] point[i] point[i + 1] point[i + 1][j + 1]
-		// always draw the points in clockwise direction
-		draw_line(data->bitmap, point0, point1, color);
-}*/
 
 void	draw_map(t_app *data, int color)
 {
@@ -52,8 +40,6 @@ void	draw_map(t_app *data, int color)
 				color =	0x00FFFFFF;
 			else
 				color = projection[i].color;
-			if (projection[i].z != 0 && projection[i + data->map->width].z != 0)
-				color =	0x00FFFFFF;
 			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
 		}
 		else
@@ -62,31 +48,15 @@ void	draw_map(t_app *data, int color)
 	}
 }
 
-t_map	*map_get(char *map_name)
-{
-	int		map_fd;
-	t_map	*map;
-
-	map_fd = map_open(map_name);
-	t_list *map_lines = map_read(map_fd);
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map->points = map_parse(map_lines, &map->width, &map->length);
-	map->size = map->width * map->length;
-	map->scale = 1;
-	return (map);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_app	app_data;
 	
 	//init mlx
 	app_data.mlx = mlx_init();
-	app_data.window = mlx_new_window(app_data.mlx, SCREEN_W, SCREEN_H, "FdF - lfarias-");
+	app_data.window = mlx_new_window(app_data.mlx, SCREEN_W, SCREEN_L, "FdF - lfarias-");
 	app_data.bitmap = malloc(sizeof(t_frame));
-	app_data.bitmap->img = mlx_new_image(app_data.mlx, SCREEN_W, SCREEN_H);
+	app_data.bitmap->img = mlx_new_image(app_data.mlx, SCREEN_W, SCREEN_L);
 	app_data.bitmap->addr = mlx_get_data_addr(app_data.bitmap->img, &app_data.bitmap->bits_per_pixel,
 			&app_data.bitmap->line_length, &app_data.bitmap->endian);
 	

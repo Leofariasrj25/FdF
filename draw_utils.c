@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/17 00:54:17 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:34:54 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	on_limits(t_app *data, t_coord *points)
 	
 	i = 0;
 	img_width = SCREEN_W - 30;
-	img_height = SCREEN_H - 30;
+	img_height = SCREEN_L - 30;
 	while (i < data->map->size)
 	{	
 		if (points[i].x  < 30 || points[i].x  > img_width)
@@ -50,8 +50,8 @@ void	fit_img(t_app *data, t_coord *projection)
 	int		i;
 
 	data->map->scale = 1;
-	data->map->source.x = (SCREEN_W / 4); 
-	data->map->source.y = SCREEN_H - (SCREEN_H / 4);
+	data->map->source.x = (SCREEN_W / 2); 
+	data->map->source.y = SCREEN_L / 2;
 	data->map->source.z = 0;
 	resize_img(data, projection);	
 	while (on_limits(data, projection))

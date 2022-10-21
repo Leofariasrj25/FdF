@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 22:30:34 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 13:34:03 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FDF_H
 # include "libft/libft.h"
 
-# define SCREEN_W 1440
-# define SCREEN_H 900 
+# define SCREEN_W 1920
+# define SCREEN_L 1080 
 
 typedef struct s_coord
 {
@@ -27,9 +27,12 @@ typedef struct s_coord
 
 typedef struct s_map
 {
+	char			*name;
 	int				width;
 	int				length;
 	int				size;
+	int				max_depth;
+	int				min_depth;
 	double			scale;
 	t_coord			source;
 	struct s_coord	*points;
@@ -56,6 +59,7 @@ typedef struct s_app_info
 }	t_app;
 
 // map
+t_map	*map_get(char *map_name);
 int		map_open(char *map_name);
 t_list	*map_read(int map_fd);
 t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height);
