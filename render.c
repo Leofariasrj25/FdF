@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 20:35:20 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 12:05:48 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	resize_img(t_app *data, t_coord *projection)
 int	on_limits(t_app *data, t_coord *points)
 {
 	int		i;
-	int		img_width;
-	int		img_height;
+	int		canvas_width;
+	int		canvas_length;
 	
 	i = 0;
-	img_width = SCREEN_W - CANVAS_MARGIN;
-	img_height = SCREEN_L - CANVAS_MARGIN;
+	canvas_width = SCREEN_W - CANVAS_MARGIN;
+	canvas_length = SCREEN_L - CANVAS_MARGIN;
 	while (i < data->map->size)
 	{	
-		if (points[i].x  < CANVAS_MARGIN || points[i].x  > img_width)
+		if (points[i].x  < (MENU_WIDTH + CANVAS_MARGIN) || points[i].x  >= canvas_width)
 			return (0);
-		if (points[i].y < CANVAS_MARGIN || points[i].y > img_height)
+		if (points[i].y < CANVAS_MARGIN || points[i].y >= canvas_length)
 			return (0);
 		i++;
 	}
@@ -47,7 +47,7 @@ void	fit_img(t_app *data, t_coord *projection)
 	int		i;
 
 	data->map->scale = 1;
-	data->map->source.x = ((SCREEN_W - MENU_WIDTH) / 6) + MENU_WIDTH;
+	data->map->source.x = ((SCREEN_W - MENU_WIDTH) / 4) + MENU_WIDTH;
 	data->map->source.y = SCREEN_L / 2;
 	data->map->source.z = 0;
 	resize_img(data, projection);	

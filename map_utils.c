@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:29:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 15:08:44 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 12:54:49 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,18 @@
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
 
-void	get_minmax_z(t_map *map);
-
-t_map	*map_get(char *map_name)
+int	get_line_size(char **fields)
 {
-	int		map_fd;
-	t_map	*map;
+	int		size;
 
-	map_fd = map_open(map_name);
-	t_list *map_lines = map_read(map_fd);
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map->points = map_parse(map_lines, &map->width, &map->length);
-	map->size = map->width * map->length;
-	get_minmax_z(map);
-	map->name = ft_strrchr(map_name, '/');
-	if (!map->name)
-		map->name = map_name;
-	return (map);
+	if (!fields)
+		return (0);
+	size = 0;
+	while (fields[size])
+	{
+		size++;
+	}
+	return (size);
 }
 
 void	get_minmax_z(t_map *map)

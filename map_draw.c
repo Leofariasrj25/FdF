@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:21:10 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 23:14:14 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 01:28:28 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	color_pick(t_coord *p0, t_coord *p1)
 
 	color = 0;
 	if ((p0->color == 0 && p1->color == 0) && (p0->z != 0 && p1->z != 0))
-		color = 0x00FFFFFF;
+		color = 0xf08d2e;
 	else if (p0->color == 0 && p1->color == 0)
 		color = 0x20C20E;
 	else if (p0->color != 0)

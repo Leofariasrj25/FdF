@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 23:26:08 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:08:20 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,26 @@
 #include "libft/get_next_line.h"
 #include <fcntl.h>
 
-int	get_line_size(char **fields)
+// Manages all of the map reading and conversion logic
+t_map	*map_get(char *map_name)
 {
-	int		size;
+	int		map_fd;
+	t_map	*map;
 
-	if (!fields)
-		return (0);
-	size = 0;
-	while (fields[size])
-	{
-		size++;
-	}
-	return (size);
+	map_fd = map_open(map_name);
+	//if (map_fd == -1)
+		//all_you_need_is_kill(map_name);
+	t_list *map_lines = map_read(map_fd);
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->points = map_parse(map_lines, &map->width, &map->length);
+	map->size = map->width * map->length;
+	get_minmax_z(map);
+	map->name = ft_strrchr(map_name, '/');
+	if (!map->name)
+		map->name = map_name;
+	return (map);
 }
 
 int	map_open(char *map_name)
@@ -76,7 +84,6 @@ t_coord	*map_extract_coords(char **fields, t_coord *points)
 		points[p_i].y = line_number;
 		points[p_i].z = ft_atoi(z_and_color[0]);
 		points[p_i].color = atohex(z_and_color[1]);	
-
 		free_2d_array((void **) z_and_color);
 		p_i++;
 		i++;
@@ -85,8 +92,6 @@ t_coord	*map_extract_coords(char **fields, t_coord *points)
 	return (points);
 }
 
-//TO-DO test code
-//TO-DO free resources
 t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height)
 {
 	t_list	*line;
@@ -110,33 +115,3 @@ t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height)
 	}
 	return (points);
 }
-
-/*#include <stdio.h>
-
-int main(int argc, char *argv[])
-{
-	char	*filename = argv[1];	
-	t_list	*coords;
-	int	fd;
-
-	fd = map_open(filename);
-	coords = map_read(fd);
-	t_coord	***map_coords = map_parse(coords);
-
-	int i = 0;
-	while (map_coords[i])
-	{
-		printf("\t=== line %d ===\n", i);
-		int j = 0;
-		while (map_coords[i][j])
-		{
-			printf("=== node %d ===\n", j);
-			printf("x: %d\n", map_coords[i][j]->x);
-			printf("y: %d\n", map_coords[i][j]->y);
-			printf("z: %d\n", map_coords[i][j]->z);
-			printf("=\n");
-			j++;
-		}
-		i++;
-	}
-}*/
