@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 13:35:25 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:22:26 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char *argv[])
 	if (!check_input(argc, argv))
 		return (1);
 	app_data.map = map_get(argv[1]);
+	if (!app_data.map)
+		return (1);
 	load_mlx(&app_data);
 	draw_map(&app_data);
 	mlx_put_image_to_window(app_data.mlx, \

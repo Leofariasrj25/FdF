@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 13:08:20 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 14:42:37 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_map	*map_get(char *map_name)
 	t_map	*map;
 
 	map_fd = map_open(map_name);
-	//if (map_fd == -1)
-		//all_you_need_is_kill(map_name);
+	if (map_fd == -1)
+		return (NULL);
 	t_list *map_lines = map_read(map_fd);
 	map = malloc(sizeof(t_map));
 	if (!map)
@@ -39,12 +39,22 @@ t_map	*map_get(char *map_name)
 
 int	map_open(char *map_name)
 {
-	int	fd;
+	int		fd;
+	char	*error;
 
 	if (!map_name)
 		return (-1);
+	error = NULL;
 	fd = open(map_name, O_RDONLY);
-	return (fd);
+	if (fd != -1)
+		return (fd);
+	else
+	{
+		error = ft_strjoin("fdf: No such file or directory - ", map_name);
+		ft_putendl_fd(error, 2);
+		free(error);
+		return (-1);
+	}
 }
 
 t_list	*map_read(int map_fd)
