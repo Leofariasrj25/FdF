@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 20:37:29 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 22:44:05 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	main(int argc, char *argv[])
 	
 	// map init
 	app_data.map = map_get(argv[1]);	
-	int	color;
-
-	color = 0x00FF00;
-	draw_map(&app_data, color);
+	draw_map(&app_data);
 	mlx_put_image_to_window(app_data.mlx, app_data.window, app_data.bitmap->img, 0, 0);
 	write_menu(&app_data);
 	mlx_loop(app_data.mlx);

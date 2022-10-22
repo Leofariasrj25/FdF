@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/16 21:39:12 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 23:26:08 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 #include <fcntl.h>
-#include <stdio.h>
 
 int	get_line_size(char **fields)
 {
@@ -77,8 +76,6 @@ t_coord	*map_extract_coords(char **fields, t_coord *points)
 		points[p_i].y = line_number;
 		points[p_i].z = ft_atoi(z_and_color[0]);
 		points[p_i].color = atohex(z_and_color[1]);	
-		printf("the point color in the map is: %s %d\n", z_and_color[1], atohex(z_and_color[1]));
-		printf("the point color in the coord is: %d\n", points[p_i].color);
 
 		free_2d_array((void **) z_and_color);
 		p_i++;

@@ -6,37 +6,34 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:21:10 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 20:40:23 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/21 23:14:14 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int	color_pick(t_coord *p0, t_coord *p1);
+
 void	draw_map(t_app *data)
 {
 	// first scale, then rotate then translate
 	t_coord	*projection;
+	int		i;
+	int		j;
 	int		color;	
 
 	projection = malloc(sizeof(t_coord) * data->map->size);
 	copy_points(projection, data->map->points, data->map->size);
 	fit_img(data, projection);
-	int i = 0;
-	int j = 1;
-	// hypothesis, start to draw from the end of the row towards the beginning
+	i = 0;
+	j = 1;
 	while (i < (data->map->size - data->map->width - 1))
 	{
 		if (i < (data->map->width * j - 1))	
 		{
-			if (projection[i].color == 0 && projection[i + 1].color == 0)
-				color =	0x00FFFFFF;
-			else
-				color = projection[i].color;
+			color = color_pick(&projection[i], &projection[i + 1]);
 			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);	
-			if (projection[i].color == 0 && projection[i + data->map->width].color == 0)
-				color =	0x00FFFFFF;
-			else
-				color = projection[i].color;
+			color = color_pick(&projection[i], &projection[i + data->map->width]);
 			draw_line(data->bitmap, &projection[i], &projection[i + data->map->width], color);	
 		}
 		else
@@ -45,3 +42,19 @@ void	draw_map(t_app *data)
 	}
 	create_menu_sidebar(data);
 }
+
+int	color_pick(t_coord *p0, t_coord *p1)
+{
+	int	color;
+
+	color = 0;
+	if ((p0->color == 0 && p1->color == 0) && (p0->z != 0 && p1->z != 0))
+		color = 0x00FFFFFF;
+	else if (p0->color == 0 && p1->color == 0)
+		color = 0x20C20E;
+	else if (p0->color != 0)
+		color = p0->color;
+	return (color);
+}
+
+
