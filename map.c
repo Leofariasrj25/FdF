@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 14:42:37 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 00:26:38 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
+
+int	map_open(char *map_name);
+t_list	*map_read(int map_fd);
+t_coord	*map_extract_coords(t_list *map_lines, int *map_l, int *map_h);
 
 // Manages all of the map reading and conversion logic
 t_map	*map_get(char *map_name)
@@ -25,10 +30,13 @@ t_map	*map_get(char *map_name)
 	if (map_fd == -1)
 		return (NULL);
 	t_list *map_lines = map_read(map_fd);
+	close(map_fd);
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
-	map->points = map_parse(map_lines, &map->width, &map->length);
+	map->points = map_extract_coords(map_lines, &map->width, &map->length);
+	if (!map->points)
+		return (NULL);
 	map->size = map->width * map->length;
 	get_minmax_z(map);
 	map->name = ft_strrchr(map_name, '/');
@@ -64,22 +72,24 @@ t_list	*map_read(int map_fd)
 	char	*line;
 
 	map_lines = NULL;
+	node = NULL;
+	line = NULL;
 	while (1)
 	{
 		line = get_next_line(map_fd);
 		if (!line)
 			break ;
-		node = ft_lstnew(line);
-		if (map_lines == NULL)
-			map_lines = node;
 		else
+		{
+			node = ft_lstnew(line);
 			ft_lstadd_back(&map_lines, node);
+		}
 	}
 	return (map_lines);
 }
 
 // Test code
-t_coord	*map_extract_coords(char **fields, t_coord *points)
+t_coord	*map_parse(char **fields, t_coord *points)
 {	
 	static int	line_number;
 	static int	p_i;
@@ -102,7 +112,7 @@ t_coord	*map_extract_coords(char **fields, t_coord *points)
 	return (points);
 }
 
-t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height)
+t_coord	*map_extract_coords(t_list *map_lines, int *map_length, int *map_height)
 {
 	t_list	*line;
 	char	**fields;
@@ -113,13 +123,15 @@ t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height)
 	while (line)
 	{
 		fields = ft_split((char *) line->content, ' ');
+		if (!check_line_format(fields))
+			return (NULL);
 		if (points == NULL)
 		{
 			*map_length = get_line_size(fields);
 			*map_height = ft_lstsize(map_lines);
 			points = malloc(sizeof(t_coord) * (*map_length * *map_height));
 		}
-		map_extract_coords(fields, points);
+		map_parse(fields, points);
 		free_2d_array((void **) fields);
 		line = line->next;
 	}

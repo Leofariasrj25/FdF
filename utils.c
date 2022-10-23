@@ -6,11 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:37:46 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 16:42:17 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:36:21 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft/libft.h"
 #include "mlx_linux/mlx.h"
 
 void	print_str(t_app *data, t_coord *point, int color, char *str)
@@ -70,4 +71,13 @@ int	atohex(char *str)
 		i++;	
 	}
 	return (nbr);
+}
+
+void	print_err_msg(char	*err_msg)
+{
+	char	*error;
+
+	error = ft_strjoin("fdf : ", err_msg);
+	ft_putendl_fd(error, 2);
+	free(error);
 }

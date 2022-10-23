@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 14:22:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:48:07 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ int	load_mlx(t_app *app_data)
 
 int	check_input(int argc, char **argv)
 {
-	char	*usage = "Usage: ./fdf <filename> [ scale z_size ]";
+	char	*usage;
+
+	usage = "Usage: ./fdf <filename> [ scale z_size ]";
 	if (!((argc - 1) == 1 || (argc - 1) == 3))
 	{
-		ft_putendl_fd(usage, STDERR_FILENO);
+		ft_putendl_fd(usage, 1);
 		return (0);	
 	}
 	return (1);

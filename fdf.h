@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 13:02:41 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:22:26 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,9 @@ void	create_menu_sidebar(t_app *data);
 
 // map
 t_map	*map_get(char *map_name);
-int		map_open(char *map_name);
-t_list	*map_read(int map_fd);
-t_coord	*map_parse(t_list *map_lines, int *map_length, int *map_height);
 int		get_line_size(char **fields);
 void	get_minmax_z(t_map *map);
+int		check_line_format(char **fields);
 
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
@@ -100,5 +98,5 @@ t_coord	*copy_points(t_coord *dst, t_coord *src, int size);
 int		atohex(char *str);
 
 //error
-void	all_you_need_is_kill(char *error_msg);
+void	print_err_msg(char *err_msg);
 #endif
