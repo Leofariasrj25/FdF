@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:37:46 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 19:36:21 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:54:30 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_err_msg(char	*err_msg)
 {
 	char	*error;
 
-	error = ft_strjoin("fdf : ", err_msg);
+	error = ft_strjoin("[error]: ", err_msg);
 	ft_putendl_fd(error, 2);
 	free(error);
 }

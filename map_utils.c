@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:29:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/23 00:30:48 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:57:03 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,19 @@ void	get_minmax_z(t_map *map)
 	}
 	map->max_depth = z_positive;
 	map->min_depth = z_negative;
+}
+
+void	erase_lines(t_list *map_line)
+{
+	t_list	*node;
+	t_list	*aux;
+
+	node = map_line;
+	while (node)
+	{
+		free(node->content);
+		aux = node;
+		node = node->next;
+		free(aux);
+	}
 }

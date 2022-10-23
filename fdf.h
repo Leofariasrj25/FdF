@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 19:22:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:55:23 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_map	*map_get(char *map_name);
 int		get_line_size(char **fields);
 void	get_minmax_z(t_map *map);
 int		check_line_format(char **fields);
+void	erase_lines(t_list *map_line);
 
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
