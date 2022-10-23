@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:21:10 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 01:28:28 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:03:07 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	draw_map(t_app *data)
 		i++;
 	}
 	create_menu_sidebar(data);
+	free(projection);
 }
 
 int	color_pick(t_coord *p0, t_coord *p1)

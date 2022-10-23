@@ -6,11 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 12:05:48 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:02:40 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx_linux/mlx.h"
 #include "menu.h"
 
 void	resize_img(t_app *data, t_coord *projection)
