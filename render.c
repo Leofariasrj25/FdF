@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/25 16:59:17 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:55:24 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	render_scene(t_app *app_data)
 		app_data->projection = malloc(sizeof(t_coord) * app_data->map->size);
 	if (!app_data->win_close)
 	{
+		clear_img(app_data, app_data->projection);
 		if (!app_data->map_draw)
 		{
 			copy_points(app_data->projection, app_data->map->points, \
@@ -31,7 +32,6 @@ int	render_scene(t_app *app_data)
 		}
 		if (app_data->fit)
 		{
-			clear_img(app_data, app_data->projection);
 			fit_img(app_data, app_data->projection);
 			app_data->fit = 0;
 			app_data->map_draw = 1;

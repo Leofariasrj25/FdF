@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/25 16:57:38 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/26 00:15:43 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@
 // options bindings
 # define ESC_KEY 65307
 # define F_KEY 102
+
+// J/K -/+ z_scale
+# define K_KEY 106
+# define J_KEY 107
+
+// H/L -/+ xy_scale
+# define H_KEY 104
+# define L_KEY 108
 
 typedef struct s_coord
 {
