@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/25 17:09:24 by lfarias-         ###   ########.fr       */
+/*   Created: 2022/10/24 20:35:11 by lfarias-          #+#    #+#             */
+/*   Updated: 2022/10/25 19:20:02 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx_linux/mlx.h"
-#include <math.h>
-#include <unistd.h>
 
-int	main(int argc, char *argv[])
+int	key_press(int keycode, void *param)
 {
-	t_app	app_data;
+	t_app	*app_data;
 
-	if (!check_input_size(argc))
-		return (1);
-	app_data.map = map_get(argv[1]);
-	if (!app_data.map)
-		return (1);
-	mlx_load(&app_data);
-	vars_load(&app_data, argc, argv);
-	app_run(&app_data);
+	app_data = (t_app *) param;
+	if (keycode == F_KEY)
+		app_data->fit = 1;
+	if (keycode == ESC_KEY)
+	{
+		all_you_need_is_kill(app_data);
+		exit(0);
+	}
 	return (0);
+}
+
+int	close_button(void *param)
+{
+	t_app	*app_data;
+
+	app_data = (t_app *) param;
+	all_you_need_is_kill(app_data);
+	exit(0);
 }

@@ -6,12 +6,11 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:29:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/23 13:57:03 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:20:26 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
@@ -38,7 +37,7 @@ int	check_line_format(char **fields)
 
 	curr_line++;
 	line_len = get_line_size(fields);
-	if ((line_len == 0 && curr_line == 0) 
+	if ((line_len == 0 && curr_line == 0)
 		|| (fields[0][0] == '\n' && curr_line == 0))
 	{
 		print_err_msg("No data found");

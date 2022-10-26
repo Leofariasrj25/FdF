@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:15:09 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/23 14:16:58 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/24 21:24:31 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft/libft.h"
 #include "libft/get_next_line.h"
 #include <fcntl.h>
-#include <stdio.h>
 
 int		map_open(char *map_name);
 t_list	*map_read(int map_fd);

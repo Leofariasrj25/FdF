@@ -6,19 +6,21 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/10/22 14:19:39 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/10/25 19:28:31 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC = main.c utils.c draw.c map_draw.c map.c map_utils.c transformations.c math_utils.c render.c menu.c
+SRC = main.c utils.c app.c app_input.c draw.c map_draw.c map.c map_utils.c transformations.c \
+	  math_utils.c render.c events.c menu.c
 CC = gcc
+CFLAGS = -g -Wall -Wextra -Werror
 LIBFT_DIR = ./libft/
-LIBS_LINUX = -g -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-
+LIBS_LINUX = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	
 all:
 	make -C $(LIBFT_DIR)
-	$(CC) $(SRC) $(LIBS_LINUX) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) $(LIBS_LINUX) -o $(NAME)
 	
 ##all:
 	##make -C $(LIBFT_DIR)

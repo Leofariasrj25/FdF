@@ -6,13 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:19:28 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/22 13:11:07 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:36:13 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "math.h"
-#include <stdio.h>
 
 void	isometric(t_coord *point, int size)
 {
@@ -22,7 +21,7 @@ void	isometric(t_coord *point, int size)
 	t_coord	holder;
 
 	angle = 330;
-	rot = 60; 
+	rot = 60;
 	i = 0;
 	while (i < size)
 	{
@@ -39,7 +38,7 @@ void	isometric(t_coord *point, int size)
 	}
 }
 
-void scale(t_coord *point, double scale, int size)
+void	scale(t_coord *point, double scale, int size)
 {
 	int	i;
 
@@ -67,14 +66,14 @@ void	translate(t_coord *point, t_coord *move, int size)
 	}
 }
 
-void	z_scale(t_app *data, t_coord *projection, int size)
+void	z_scale(t_coord *projection, double z_scale, int size)
 {
 	int	i;
 
 	i = 0;
 	while (i < size)
 	{
-		projection[i].z = projection[i].z / (double) 2;
+		projection[i].z = (double) projection[i].z * z_scale;
 		i++;
 	}
 }

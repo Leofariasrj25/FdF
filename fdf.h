@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/23 13:55:23 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:57:38 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,17 @@
 # define MENU_BG_COLOR 0x002E323C
 # define MENU_KEY_COLOR 0x00AFB0AF
 # define MENU_VALUE_COLOR 0x00FF6188
-
 # define CANVAS_MARGIN 30
+
+// window management define
+# define KEY_PRESS 2
+# define KEY_PRESS_MASK 1L<<0
+# define CLOSE_WIN 17
+# define CLOSE_WIN_MASK 1L<<17
+
+// options bindings
+# define ESC_KEY 65307
+# define F_KEY 102
 
 typedef struct s_coord
 {
@@ -41,6 +50,7 @@ typedef struct s_map
 	int				max_depth;
 	int				min_depth;
 	double			scale;
+	double			z_scale;
 	t_coord			source;
 	struct s_coord	*points;
 }	t_map;
@@ -59,15 +69,26 @@ typedef struct s_app_info
 	void	*mlx;
 	void	*window;
 	t_frame	*bitmap;
+	t_coord	*projection;
 	t_map	*map;
-	double	map_scale;
-	int		screen_w;
-	int		screen_l;
+	int		win_close;
+	int		map_draw;
+	int		fit;
 }	t_app;
 
-// menu
-void	write_menu(t_app *data);
-void	create_menu_sidebar(t_app *data);
+// app
+void	app_run(t_app *app_data);
+int		mlx_load(t_app *app_data);
+void	vars_load(t_app *app_data, int argc, char **argv);
+int		check_input_size(int argc);
+double	get_z_scale(int argc, char **argv);
+double	get_scale(int map_width, int map_length, int argc, char **argv);
+void	all_you_need_is_kill(t_app *app_data);
+
+// events & controls
+int	render_scene(t_app *app_data);
+int	key_press(int keycode, void *param);
+int	close_button(void *param);
 
 // map
 t_map	*map_get(char *map_name);
@@ -79,18 +100,20 @@ void	erase_lines(t_list *map_line);
 //draw
 void	mlx_pixel_put_v2(t_frame *frame, int x, int y, int color);
 void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color);
-void	draw_map(t_app *data);
+void	draw_map(t_app *data, t_coord *projection);
+void	draw_menu(t_app *data);
+void	render_img(t_app *data, t_coord *projection);
 void	fit_img(t_app *data, t_coord *projection);
 
 // math
-int		get_abs(int n);
 double	dg2_rad(double angle);
+int		round_to_i(double value);
 
 // transformations
 void	isometric(t_coord *points, int size);
 void	scale(t_coord *points, double scale, int size);
 void	translate(t_coord *point, t_coord *move, int size);
-void	z_scale(t_app *data, t_coord *projection, int size);
+void	z_scale(t_coord *projection, double z_scale, int size);
 
 //utils
 void	print_str(t_app *data, t_coord *point, int color, char *value);

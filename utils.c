@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 17:37:46 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/23 13:54:30 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/24 22:32:01 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,18 @@ void	print_str(t_app *data, t_coord *point, int color, char *str)
 	mlx_string_put(data->mlx, data->window, point->x, point->y, color, str);
 }
 
+void	print_err_msg(char	*err_msg)
+{
+	char	*error;
+
+	error = ft_strjoin("[error]: ", err_msg);
+	ft_putendl_fd(error, 2);
+	free(error);
+}
+
 void	free_2d_array(void **matrix)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (matrix[i])
@@ -53,9 +62,9 @@ int	atohex(char *str)
 	static int	hex_values[6] = {10, 11, 12, 13, 14, 15};
 	int			nbr;
 	int			i;
-		
+
 	if (!str)
-		return(0);
+		return (0);
 	nbr = 0;
 	i = 0;
 	if (ft_strncmp(str, "0x", 2) == 0 || ft_strncmp(str, "0X", 2) == 0)
@@ -68,16 +77,7 @@ int	atohex(char *str)
 			nbr = nbr * 16 + hex_values[(str[i] - 97)];
 		else if (str[i] >= 'A' && str[i] <= 'F')
 			nbr = nbr * 16 + hex_values[(str[i] - 65)];
-		i++;	
+		i++;
 	}
 	return (nbr);
-}
-
-void	print_err_msg(char	*err_msg)
-{
-	char	*error;
-
-	error = ft_strjoin("[error]: ", err_msg);
-	ft_putendl_fd(error, 2);
-	free(error);
 }

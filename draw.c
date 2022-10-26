@@ -6,21 +6,28 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/21 20:28:31 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:49:10 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 
+#define X 0
+#define Y 1
+
 void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color);
 void	draw_low_line(t_frame *img, t_coord *p0, t_coord *p1, int color);
 void	draw_high_line(t_frame *img, t_coord *p0, t_coord *p1, int color);
-int		is_valid(t_coord *point);
+void	setup_vars(int delta[2], int axis[2], t_coord *p0, t_coord *p1);
 
 void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
-	if (!is_valid(point0) && !is_valid(point1))
+	if ((point0->x > SCREEN_W || point0->x < 0) \
+		|| (point0->y > SCREEN_L || point0->y < 0))
+		return ;
+	if ((point1->x > SCREEN_W || point1->x < 0) \
+		|| (point1->y > SCREEN_L || point1->y < 0))
 		return ;
 	if (fabs(point1->y - point0->y) < fabs(point1->x - point0->x))
 	{
@@ -38,15 +45,6 @@ void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 	}
 }
 
-int	is_valid(t_coord *point)
-{
-	if (point->x > SCREEN_W || point->x < 0)
-		return (0);
-	if (point->y > SCREEN_L || point->y < 0)
-		return (0);
-	return (1);
-}
-
 void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color)
 {
 	char	*dst;
@@ -55,71 +53,69 @@ void	mlx_pixel_put_v2(t_frame *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	setup_vars(int delta[2], int axis[2], t_coord *p0, t_coord *p1)
+{
+	delta[X] = p1->x - p0->x;
+	delta[Y] = p1->y - p0->y;
+	axis[Y] = p0->y;
+	axis[X] = p0->x;
+}
+
 // slopes between -1 and 0, 0 and 1
 void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
-	int	delta_x;
-	int	delta_y;
+	int	delta[2];
+	int	axis[2];
 	int	d_factor;
 	int	yi;
-	int	x;
-	int	y;
 
-	delta_x = point1->x - point0->x;
-	delta_y = point1->y - point0->y;
-	yi = 1;	
-	if (delta_y < 0)
+	setup_vars(delta, axis, point0, point1);
+	yi = 1;
+	if (delta[Y] < 0)
 	{
 		yi = -1;
-		delta_y *= -1;
+		delta[Y] = delta[Y] * -1;
 	}
-	d_factor = (2 * delta_y) - delta_x;
-	y = point0->y;
-	x = point0->x;
-	while (x < point1->x)
+	d_factor = (2 * delta[Y]) - delta[X];
+	while (axis[X] < point1->x)
 	{
-		mlx_pixel_put_v2(img, x, y, color);
+		mlx_pixel_put_v2(img, round_to_i(axis[X]), round_to_i(axis[Y]), color);
 		if (d_factor > 0)
 		{
-			y = y + yi;
-			d_factor = d_factor + (2 * (delta_y - delta_x));
+			axis[Y] = axis[Y] + yi;
+			d_factor = d_factor + (2 * (delta[Y] - delta[X]));
 		}
 		else
-			d_factor = d_factor + 2 * delta_y;
-		x++;
+			d_factor = d_factor + 2 * delta[Y];
+		axis[X] = axis[X] + 1;
 	}
 }
 
 void	draw_high_line(t_frame *img, t_coord *p0, t_coord *p1, int color)
 {
-	int	delta_x;
-	int	delta_y;
+	int	delta[2];
+	int	axis[2];
 	int	d_factor;
 	int	xi;
-	int	x;
-	int	y;
 
-	delta_x = p1->x - p0->x;
-	delta_y = p1->y - p0->y;
-	xi = 1;	
-	if (delta_x < 0)
+	setup_vars(delta, axis, p0, p1);
+	xi = 1;
+	if (delta[X] < 0)
 	{
 		xi = -1;
-		delta_x *= -1;
+		delta[X] = delta[X] * -1;
 	}
-	d_factor = (2 * delta_x) - delta_y;
-	x = p0->x;
-	y = p0->y;
-	while (y < p1->y)
+	d_factor = (2 * delta[X]) - delta[Y];
+	while (axis[Y] < p1->y)
 	{
-		mlx_pixel_put_v2(img, x, y, color);
+		mlx_pixel_put_v2(img, round_to_i(axis[X]), round_to_i(axis[Y]), color);
 		if (d_factor > 0)
 		{
-			x = x + xi;
-			d_factor = d_factor + (2 * (delta_x - delta_y));
+			axis[X] = axis[X] + xi;
+			d_factor = d_factor + (2 * (delta[X] - delta[Y]));
 		}
 		else
-			d_factor = d_factor + 2 * delta_x;
-		y++;
+			d_factor = d_factor + 2 * delta[X];
+		axis[Y] = axis[Y] + 1;
 	}
 }
