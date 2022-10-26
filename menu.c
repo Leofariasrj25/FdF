@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 15:49:31 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/26 00:15:54 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/26 00:29:47 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	write_controls(t_app *data)
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "F : FIT MAP");
 	point.y = point.y + MENU_LINE_HEIGHT;
-	print_str(data, &point, MENU_KEY_COLOR, "K/J : -/+ Z_SCALE");
+	print_str(data, &point, MENU_KEY_COLOR, "J/K : -/+ Z_SCALE");
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "H/L : -/+ XY_SCALE");
 }
