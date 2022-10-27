@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/26 00:15:43 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:49:00 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	draw_map(t_app *data, t_coord *projection);
 void	draw_menu(t_app *data);
 void	render_img(t_app *data, t_coord *projection);
 void	fit_img(t_app *data, t_coord *projection);
+void	clear_img(t_app *data, t_coord *projection);
 
 // math
 double	dg2_rad(double angle);

@@ -6,15 +6,13 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/25 22:55:24 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/26 18:48:29 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx_linux/mlx.h"
 #include "menu.h"
-
-void	clear_img(t_app *data, t_coord *projection);
 
 int	render_scene(t_app *app_data)
 {
@@ -44,28 +42,6 @@ int	render_scene(t_app *app_data)
 	return (0);
 }
 
-void	clear_img(t_app *data, t_coord *projection)
-{
-	int		i;
-	int		j;
-	int		color;	
-
-	i = 0;
-	j = 1;
-	color = 0x000000;
-	while (i < (data->map->size - data->map->width - 1))
-	{
-		if (i < (data->map->width * j - 1))
-		{
-			draw_line(data->bitmap, &projection[i], &projection[i + 1], color);
-			draw_line(data->bitmap, &projection[i], \
-				&projection[i + data->map->width], color);
-		}
-		else
-			j++;
-		i++;
-	}
-}
 
 void	render_img(t_app *data, t_coord *projection)
 {
