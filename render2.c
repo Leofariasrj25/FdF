@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:43:58 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/26 18:49:55 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:37:46 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	clear_last_line(t_app *data, t_coord *projection)
 		i++;
 	}
 }
-void clear_last_col(t_app *data, t_coord *projection)
+
+void	clear_last_col(t_app *data, t_coord *projection)
 {
 	int	i;
 	int	color;

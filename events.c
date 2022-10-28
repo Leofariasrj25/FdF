@@ -6,13 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:35:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/26 00:18:55 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:39:51 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx_linux/mlx.h"
-#include <stdio.h>
 
 void	zscale_change(int keycode, t_app *app_data);
 void	xyscale_change(int keycode, t_app *app_data);
@@ -21,7 +20,6 @@ int	key_press(int keycode, void *param)
 {
 	t_app	*app_data;
 
-	printf("keycode %d\n", keycode);
 	app_data = (t_app *) param;
 	if (keycode == F_KEY)
 		app_data->fit = 1;
@@ -60,6 +58,6 @@ void	xyscale_change(int keycode, t_app *app_data)
 	if (keycode == H_KEY)
 		app_data->map->scale = app_data->map->scale - 0.5;
 	else if (keycode == L_KEY)
-		app_data->map->scale = app_data->map->scale + 0.5; 
+		app_data->map->scale = app_data->map->scale + 0.5;
 	app_data->map_draw = 0;
 }

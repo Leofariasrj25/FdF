@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/26 18:48:29 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:37:13 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	render_scene(t_app *app_data)
 	draw_menu(app_data);
 	return (0);
 }
-
 
 void	render_img(t_app *data, t_coord *projection)
 {

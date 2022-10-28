@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:20:22 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/25 14:49:10 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:30:02 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ void	setup_vars(int delta[2], int axis[2], t_coord *p0, t_coord *p1);
 
 void	draw_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 {
-	if ((point0->x > SCREEN_W || point0->x < 0) \
-		|| (point0->y > SCREEN_L || point0->y < 0))
-		return ;
-	if ((point1->x > SCREEN_W || point1->x < 0) \
-		|| (point1->y > SCREEN_L || point1->y < 0))
+	if (out_of_screen(point0, point1))
 		return ;
 	if (fabs(point1->y - point0->y) < fabs(point1->x - point0->x))
 	{
@@ -77,7 +73,7 @@ void	draw_low_line(t_frame *img, t_coord *point0, t_coord *point1, int color)
 		delta[Y] = delta[Y] * -1;
 	}
 	d_factor = (2 * delta[Y]) - delta[X];
-	while (axis[X] < point1->x)
+	while (axis[X] < point1->x && on_screen(axis[X], axis[Y]))
 	{
 		mlx_pixel_put_v2(img, round_to_i(axis[X]), round_to_i(axis[Y]), color);
 		if (d_factor > 0)
@@ -106,7 +102,7 @@ void	draw_high_line(t_frame *img, t_coord *p0, t_coord *p1, int color)
 		delta[X] = delta[X] * -1;
 	}
 	d_factor = (2 * delta[X]) - delta[Y];
-	while (axis[Y] < p1->y)
+	while (axis[Y] < p1->y && on_screen(axis[X], axis[Y]))
 	{
 		mlx_pixel_put_v2(img, round_to_i(axis[X]), round_to_i(axis[Y]), color);
 		if (d_factor > 0)
