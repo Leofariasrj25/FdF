@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:35:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 14:39:51 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:45:01 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,15 @@ void	zscale_change(int keycode, t_app *app_data)
 
 void	xyscale_change(int keycode, t_app *app_data)
 {
+	double	limit;
+
+	limit = 0.0;
 	if (keycode == H_KEY)
-		app_data->map->scale = app_data->map->scale - 0.5;
+	{
+		limit = app_data->map->scale - 0.5;
+		if (limit >= 0.0)
+			app_data->map->scale = limit;
+	}
 	else if (keycode == L_KEY)
 		app_data->map->scale = app_data->map->scale + 0.5;
 	app_data->map_draw = 0;
