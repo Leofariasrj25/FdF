@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 20:05:08 by lfarias-         ###   ########.fr       */
+/*   Created: 2022/10/28 14:02:39 by lfarias-          #+#    #+#             */
+/*   Updated: 2022/10/28 16:07:58 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "mlx_linux/mlx.h"
-#include <math.h>
-#include <unistd.h>
+#include "fdf_bonus.h"
 
-int	main(int argc, char *argv[])
+int	on_screen(double x, double y)
 {
-	t_app	app_data;
+	if ((x >= 0.0 && x <= SCREEN_W) && (y >= 0.0 && y <= SCREEN_L))
+		return (1);
+	else
+		return (0);
+}
 
-	if (!check_input_size(argc))
+int	out_of_screen(t_coord *p0, t_coord *p1)
+{
+	if (!on_screen(p0->x, p0->y) && !on_screen(p1->x, p1->y))
 		return (1);
-	app_data.map = map_get(argv[1]);
-	if (!app_data.map)
-		return (1);
-	mlx_load(&app_data);
-	vars_load(&app_data, argc, argv);
-	app_run(&app_data);
-	return (0);
+	else
+		return (0);
 }

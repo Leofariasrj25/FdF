@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   math_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/11 14:40:12 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 20:05:08 by lfarias-         ###   ########.fr       */
+/*   Created: 2022/09/30 21:25:35 by lfarias-          #+#    #+#             */
+/*   Updated: 2022/10/28 16:08:44 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "mlx_linux/mlx.h"
-#include <math.h>
-#include <unistd.h>
+#include "fdf_bonus.h"
+#include "math.h"
 
-int	main(int argc, char *argv[])
+double	dg2_rad(double angle)
 {
-	t_app	app_data;
+	static const double	pi = 3.14159;
 
-	if (!check_input_size(argc))
-		return (1);
-	app_data.map = map_get(argv[1]);
-	if (!app_data.map)
-		return (1);
-	mlx_load(&app_data);
-	vars_load(&app_data, argc, argv);
-	app_run(&app_data);
-	return (0);
+	return (pi * angle / (double) 180.00);
+}
+
+int	round_to_i(double value)
+{
+	int	rounded;
+
+	rounded = (value / 1);
+	if (fmod(value, 1) >= 0.5)
+		return (rounded + 1);
+	else
+		return (rounded);
 }
