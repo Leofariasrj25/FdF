@@ -6,12 +6,12 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/29 01:02:58 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:53:27 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 # include "../libft/libft.h"
 
 # define SCREEN_W 1920
@@ -25,13 +25,10 @@
 
 // window management define
 # define KEY_PRESS 2
-# define KEY_PRESS_MASK 1L<<0
 # define CLOSE_WIN 17
-# define CLOSE_WIN_MASK 1L<<17
-# define MOUSE_PRESS_MASK 1L<<2
-# define MOUSE_REL_MASK 1L<<3
 # define MOUSE_PRESS 4
 # define MOUSE_RELEASE 5
+# define MOUSE_MOVE 6
 
 // options bindings
 # define ESC_KEY 65307
@@ -102,12 +99,13 @@ double	get_scale(int map_width, int map_length, int argc, char **argv);
 void	all_you_need_is_kill(t_app *app_data);
 
 // events & controls
-int	render_scene(t_app *app_data);
-int	key_press(int keycode, void *param);
-int	close_button(void *param);
-int	mouse_press(int button, int x, int y, void *param);
-int mouse_release(int button, int x, int y, void *param);
-int	mouse_move(int x, int y, void *param);
+int		render_scene(t_app *app_data);
+int		key_press(int keycode, void *param);
+int		close_button(void *param);
+int		mouse_press(int button, int x, int y, void *param);
+int		mouse_release(int button, int x, int y, void *param);
+int		mouse_move(int x, int y, void *param);
+int		mouse_scroll(int button, int x, int y, void *param);
 
 // map
 t_map	*map_get(char *map_name);
