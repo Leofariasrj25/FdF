@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:01:26 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 16:11:33 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/29 01:13:28 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	app_run(t_app *data)
 {
 	mlx_hook(data->window, KEY_PRESS, KEY_PRESS_MASK, key_press, data);
 	mlx_hook(data->window, CLOSE_WIN, CLOSE_WIN_MASK, close_button, data);
+	mlx_hook(data->window, MOUSE_PRESS, MOUSE_PRESS_MASK, mouse_press, data);
+	mlx_hook(data->window, MOUSE_RELEASE, MOUSE_REL_MASK, mouse_release, data);
+	mlx_hook(data->window, 6, 1L << 6, mouse_move, data);
 	mlx_loop_hook(data->mlx, render_scene, data);
 	mlx_loop(data->mlx);
 }
@@ -51,4 +54,6 @@ void	vars_load(t_app *app_data, int argc, char **argv)
 	app_data->map->source.x = ((SCREEN_W - MENU_WIDTH) / 4) + MENU_WIDTH;
 	app_data->map->source.y = SCREEN_L / 2;
 	app_data->map->source.z = 0;
+	app_data->mouse_l_press = 0;
+	app_data->mouse_r_press = 0;
 }

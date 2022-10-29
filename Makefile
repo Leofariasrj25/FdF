@@ -6,7 +6,7 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/10/28 20:29:16 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/10/29 01:09:53 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ BONUS_SRC =	main_bonus.c \
 		render_bonus.c \
 		render2_bonus.c \
 		events_bonus.c \
+		mouse_events_bonus.c \
 		menu_bonus.c
 BONUS_DIR = ./bonus/
 BONUS_FILES = $(addprefix $(BONUS_DIR), $(BONUS_SRC))
