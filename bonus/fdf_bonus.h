@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/30 11:55:19 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:29:38 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define ARROW_LEFT 65361
 # define ARROW_DOWN 65364
 # define ARROW_RIGHT 65363
+# define Q_KEY 101
+# define E_KEY 113
 
 typedef struct s_coord
 {
@@ -141,10 +143,12 @@ double	dg2_rad(double angle);
 int		round_to_i(double value);
 
 // transformations
-void	isometric(t_coord *points, int size);
+void	isometric(t_app *app_data);
 void	scale(t_coord *points, double scale, int size);
 void	translate(t_coord *point, t_coord *move, int size);
 void	z_scale(t_coord *projection, double z_scale, int size);
+void	rotate_x(t_coord *points, double angle, int size);
+void	rotate_y(t_coord *points, double angle, int size);
 void	rotate_z(t_coord *points, double angle, int size);
 
 //utils

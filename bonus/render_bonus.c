@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/30 11:48:09 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:38:06 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	render_scene(t_app *app_data)
 void	render_img(t_app *data, t_coord *projection)
 {
 	z_scale(projection, data->map->z_scale, data->map->size);
-	rotate_z(projection, data->map->angles[Z], data->map->size);
-	isometric(projection, data->map->size);
 	scale(projection, data->map->scale, data->map->size);
+	rotate_z(projection, data->map->angles[Z], data->map->size);
+	rotate_y(projection, data->map->angles[Y], data->map->size);
+	rotate_x(projection, data->map->angles[X], data->map->size);
 	translate(projection, &data->map->source, data->map->size);
 }
 
@@ -84,6 +85,7 @@ void	fit_img(t_app *data, t_coord *projection)
 	{
 		data->map->scale = data->map->scale + 0.2;
 		copy_points(projection, data->map->points, data->map->size);
+		isometric(data);
 		render_img(data, projection);
 	}
 }
