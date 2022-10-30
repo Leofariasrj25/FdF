@@ -6,35 +6,42 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 22:19:28 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 16:09:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:23:56 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 #include "math.h"
 
+#define COS 0
+#define SIN 1
+#define ISO_ANGLE 330
+#define ISO_ROT 60
+
 void	isometric(t_coord *point, int size)
 {
 	int		i;
-	double	angle;
-	double	rot;
 	t_coord	holder;
+	double	cos_sin_angle[2];	
+	double	cos_sum_diff[2];
+	double	sin_sum_diff[2];
 
-	angle = 330;
-	rot = 60;
-	i = 0;
-	while (i < size)
+	cos_sin_angle[COS] = cos(dg2_rad(ISO_ANGLE));
+	cos_sin_angle[SIN] = sin(dg2_rad(ISO_ANGLE));
+	cos_sum_diff[0] = cos(dg2_rad(ISO_ANGLE) + dg2_rad(ISO_ROT));
+	cos_sum_diff[1] = cos(dg2_rad(ISO_ANGLE) - dg2_rad(ISO_ROT));
+	sin_sum_diff[0] = sin(dg2_rad(ISO_ANGLE) + dg2_rad(ISO_ROT));
+	sin_sum_diff[1] = sin(dg2_rad(ISO_ANGLE) - dg2_rad(ISO_ROT));
+	i = -1;
+	while (++i < size)
 	{
 		holder.x = point[i].x;
 		holder.y = point[i].y;
 		holder.z = point[i].z;
-		point[i].x = holder.x * cos(dg2_rad(angle));
-		point[i].x = point[i].x + holder.y * cos(dg2_rad(angle) + dg2_rad(rot));
-		point[i].x = point[i].x + holder.z * cos(dg2_rad(angle) - dg2_rad(rot));
-		point[i].y = holder.x * sin(dg2_rad(angle));
-		point[i].y = point[i].y + holder.y * sin(dg2_rad(angle) + dg2_rad(rot));
-		point[i].y = point[i].y + holder.z * sin(dg2_rad(angle) - dg2_rad(rot));
-		i++;
+		point[i].x = holder.x * cos_sin_angle[COS] + holder.y * cos_sum_diff[0] \
+			+ holder.z * cos_sum_diff[1];
+		point[i].y = holder.x * cos_sin_angle[SIN] + holder.y * sin_sum_diff[0] \
+			+ holder.z * sin_sum_diff[1];
 	}
 }
 
