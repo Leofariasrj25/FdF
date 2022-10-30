@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:01:26 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/29 17:54:29 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:50:43 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void	vars_load(t_app *app_data, int argc, char **argv)
 	app_data->map->source.x = ((SCREEN_W - MENU_WIDTH) / 4) + MENU_WIDTH;
 	app_data->map->source.y = SCREEN_L / 2;
 	app_data->map->source.z = 0;
+	app_data->map->angles[X] = 1;
+	app_data->map->angles[Y] = 1;
+	app_data->map->angles[Z] = 1;
 	app_data->mouse_l_press = 0;
 	app_data->mouse_r_press = 0;
 }

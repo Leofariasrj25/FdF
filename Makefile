@@ -6,7 +6,7 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/10/29 01:09:53 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/10/30 11:35:39 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ BONUS_SRC =	main_bonus.c \
 		map_bonus.c \
 		map_utils_bonus.c \
 		transformations_bonus.c \
+		transformations2_bonus.c \
 		math_utils_bonus.c \
 		render_bonus.c \
 		render2_bonus.c \
@@ -62,7 +63,7 @@ all: $(NAME)
 clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MLX_DIR) clean
-	rm -f *.o
+	rm -f $(SRC_OBJ) 
 
 fclean: clean
 	rm -f $(LIBFT_DIR)/libft.a
@@ -74,3 +75,6 @@ bonus: $(BONUS_OBJS)
 	make -C $(LIBFT_DIR) libft.a
 	make -C $(MLX_DIR) all
 	$(CC) $(CFLAGS) $(BONUS_FILES) $(LDFLAGS) -o $(NAME)
+
+bfclean:
+	rm -rf $(BONUS_OBJS)

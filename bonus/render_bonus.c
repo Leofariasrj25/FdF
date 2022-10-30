@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:43:25 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/28 16:14:44 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:48:09 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	render_scene(t_app *app_data)
 void	render_img(t_app *data, t_coord *projection)
 {
 	z_scale(projection, data->map->z_scale, data->map->size);
+	rotate_z(projection, data->map->angles[Z], data->map->size);
 	isometric(projection, data->map->size);
 	scale(projection, data->map->scale, data->map->size);
 	translate(projection, &data->map->source, data->map->size);

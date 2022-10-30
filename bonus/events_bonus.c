@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:35:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/29 01:12:26 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:02:10 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,25 @@
 
 void	zscale_change(int keycode, t_app *app_data);
 void	xyscale_change(int keycode, t_app *app_data);
+void	rotate(int keycode, t_app *app_data);
 
+#include <stdio.h>
 int	key_press(int keycode, void *param)
 {
 	t_app	*app_data;
 
+	printf("keycode is: %d\n", keycode);
 	app_data = (t_app *) param;
 	if (keycode == F_KEY)
 		app_data->fit = 1;
-	if (keycode == J_KEY || keycode == K_KEY)
+	else if (keycode == J_KEY || keycode == K_KEY)
 		zscale_change(keycode, app_data);
-	if (keycode == H_KEY || keycode == L_KEY)
+	else if (keycode == H_KEY || keycode == L_KEY)
 		xyscale_change(keycode, app_data);
-	if (keycode == ESC_KEY)
+	else if (keycode == ARROW_UP || keycode == ARROW_DOWN || keycode == ARROW_RIGHT \
+		|| keycode == ARROW_LEFT)
+		rotate(keycode, app_data);
+	else if (keycode == ESC_KEY)
 	{
 		all_you_need_is_kill(app_data);
 		exit(0);
@@ -66,5 +72,14 @@ void	xyscale_change(int keycode, t_app *app_data)
 	}
 	else if (keycode == L_KEY)
 		app_data->map->scale = app_data->map->scale + 0.5;
+	app_data->map_draw = 0;
+}
+
+void	rotate(int keycode, t_app *app_data)
+{
+	if (keycode == ARROW_LEFT)
+		app_data->map->angles[Z] = app_data->map->angles[Z] - 15;
+	if (keycode == ARROW_RIGHT)
+		app_data->map->angles[Z] = app_data->map->angles[Z] + 15;
 	app_data->map_draw = 0;
 }

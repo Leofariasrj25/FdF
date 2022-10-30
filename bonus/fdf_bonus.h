@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/29 17:53:27 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/30 11:55:19 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 
 # define SCREEN_W 1920
 # define SCREEN_L 1080 
+
+# define X 0
+# define Y 1
+# define Z 2
 
 # define MENU_WIDTH 200 
 # define MENU_BG_COLOR 0x002E323C
@@ -42,6 +46,12 @@
 # define H_KEY 104
 # define L_KEY 108
 
+// control rotation
+# define ARROW_UP 65362
+# define ARROW_LEFT 65361
+# define ARROW_DOWN 65364
+# define ARROW_RIGHT 65363
+
 typedef struct s_coord
 {
 	double			x;
@@ -60,6 +70,7 @@ typedef struct s_map
 	int				min_depth;
 	double			scale;
 	double			z_scale;
+	double			angles[3];
 	t_coord			source;
 	struct s_coord	*points;
 }	t_map;
@@ -134,6 +145,7 @@ void	isometric(t_coord *points, int size);
 void	scale(t_coord *points, double scale, int size);
 void	translate(t_coord *point, t_coord *move, int size);
 void	z_scale(t_coord *projection, double z_scale, int size);
+void	rotate_z(t_coord *points, double angle, int size);
 
 //utils
 void	print_str(t_app *data, t_coord *point, int color, char *value);
