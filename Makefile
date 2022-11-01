@@ -6,7 +6,7 @@
 #    By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/14 14:03:09 by lfarias-          #+#    #+#              #
-#    Updated: 2022/10/30 11:35:39 by lfarias-         ###   ########.fr        #
+#    Updated: 2022/10/31 22:13:56 by lfarias-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ BONUS_SRC =	main_bonus.c \
 		render_bonus.c \
 		render2_bonus.c \
 		events_bonus.c \
+		events2_bonus.c \
 		mouse_events_bonus.c \
 		menu_bonus.c
 BONUS_DIR = ./bonus/

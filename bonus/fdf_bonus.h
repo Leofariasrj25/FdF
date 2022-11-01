@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/30 14:29:38 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:46:54 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 // options bindings
 # define ESC_KEY 65307
 # define F_KEY 102
+# define I_KEY 105
+# define P_KEY 112
 
 // J/K -/+ z_scale
 # define K_KEY 106
@@ -96,6 +98,8 @@ typedef struct s_app_info
 	int		win_close;
 	int		map_draw;
 	int		fit;
+	int		isometric;
+	int		parallel;
 	int		mouse_l_press;
 	int		mouse_r_press;
 	int		offset_px;
@@ -143,7 +147,7 @@ double	dg2_rad(double angle);
 int		round_to_i(double value);
 
 // transformations
-void	isometric(t_app *app_data);
+void	isometric(t_coord *points, int size);
 void	scale(t_coord *points, double scale, int size);
 void	translate(t_coord *point, t_coord *move, int size);
 void	z_scale(t_coord *projection, double z_scale, int size);
