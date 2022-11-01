@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 15:49:31 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 22:33:28 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/31 22:36:02 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ void	write_controls(t_app *data)
 	print_str(data, &point, MENU_KEY_COLOR, "SCROLL : ZOOM IN/OUT");
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "F : FIT MAP");
+	point.y = point.y + MENU_LINE_HEIGHT;
+	print_str(data, &point, MENU_KEY_COLOR, "I : ISOMETRIC");
+	point.y = point.y + MENU_LINE_HEIGHT;
+	print_str(data, &point, MENU_KEY_COLOR, "P : PARALLEL");
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "J/K : -/+ Z_SCALE");
 	point.y = point.y + MENU_LINE_HEIGHT;
