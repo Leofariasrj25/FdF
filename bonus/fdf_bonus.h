@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 21:46:54 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/31 22:32:25 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define MENU_VALUE_COLOR 0x00FF6188
 # define CANVAS_MARGIN 30
 
-// window management define
+// window management events
 # define KEY_PRESS 2
 # define CLOSE_WIN 17
 # define MOUSE_PRESS 4

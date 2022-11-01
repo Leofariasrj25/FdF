@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 15:49:31 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 22:25:58 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/10/31 22:33:28 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	write_controls(t_app *data)
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "ESC : CLOSE");
 	point.y = point.y + MENU_LINE_HEIGHT;
-	print_str(data, &point, MENU_KEY_COLOR, "LEFT MOUSE: MOVE");
+	print_str(data, &point, MENU_KEY_COLOR, "LEFT MOUSE : MOVE");
 	point.y = point.y + MENU_LINE_HEIGHT;
-	print_str(data, &point, MENU_KEY_COLOR, "SCROLL: ZOOM IN/OUT");
+	print_str(data, &point, MENU_KEY_COLOR, "SCROLL : ZOOM IN/OUT");
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "F : FIT MAP");
 	point.y = point.y + MENU_LINE_HEIGHT;
@@ -70,9 +70,9 @@ void	write_controls(t_app *data)
 	point.y = point.y + MENU_LINE_HEIGHT;
 	print_str(data, &point, MENU_KEY_COLOR, "H/L : -/+ XY_SCALE");
 	point.y = point.y + MENU_LINE_HEIGHT;
-	print_str(data, &point, MENU_KEY_COLOR, "ARROWS: -/+ XY_ROTATION");
+	print_str(data, &point, MENU_KEY_COLOR, "ARROWS : -/+ XY_ROTATION");
 	point.y = point.y + MENU_LINE_HEIGHT;
-	print_str(data, &point, MENU_KEY_COLOR, "Q/E: -/+ Z_ROTATION");
+	print_str(data, &point, MENU_KEY_COLOR, "Q/E : -/+ Z_ROTATION");
 }
 
 void	write_map_info(t_app *data)
