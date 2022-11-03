@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:01:26 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 21:36:30 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/11/03 02:04:55 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	vars_load(t_app *app_data, int argc, char **argv)
 	app_data->map->angles[X] = 0;
 	app_data->map->angles[Y] = 0;
 	app_data->map->angles[Z] = 0;
+	app_data->base_color = 0x4B4B4B;
+	app_data->medium_color = 0xC4C4C4;
+	app_data->top_color = 0xff9001;
 	app_data->parallel = 0;
 	app_data->isometric = 1;
 	app_data->mouse_l_press = 0;

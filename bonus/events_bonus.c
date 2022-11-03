@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 20:35:11 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 22:15:24 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/11/03 02:02:01 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	key_press(int keycode, void *param)
 		|| keycode == ARROW_RIGHT || keycode == ARROW_LEFT \
 		|| keycode == Q_KEY || keycode == E_KEY)
 		rotate(keycode, app_data);
+	else if (keycode == PALETTE_1 || keycode == PALETTE_2 || keycode == PALETTE_3)
+		change_palette(keycode, app_data);
 	else if (keycode == ESC_KEY)
 	{
 		all_you_need_is_kill(app_data);

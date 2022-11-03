@@ -6,7 +6,7 @@
 /*   By: lfarias- <lfarias-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 19:05:59 by lfarias-          #+#    #+#             */
-/*   Updated: 2022/10/31 22:32:25 by lfarias-         ###   ########.fr       */
+/*   Updated: 2022/11/03 02:02:20 by lfarias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@
 # define F_KEY 102
 # define I_KEY 105
 # define P_KEY 112
+# define PALETTE_1 49
+# define PALETTE_2 50
+# define PALETTE_3 51
+# define PALETTE_4 52
 
 // J/K -/+ z_scale
 # define K_KEY 106
@@ -104,6 +108,10 @@ typedef struct s_app_info
 	int		mouse_r_press;
 	int		offset_px;
 	int		offset_py;
+	int		color_palette;
+	int		base_color;
+	int		medium_color;
+	int		top_color;
 }	t_app;
 
 // app
@@ -123,6 +131,7 @@ int		mouse_press(int button, int x, int y, void *param);
 int		mouse_release(int button, int x, int y, void *param);
 int		mouse_move(int x, int y, void *param);
 int		mouse_scroll(int button, int x, int y, void *param);
+int		change_palette(int keycode, t_app *app_data);
 
 // map
 t_map	*map_get(char *map_name);
